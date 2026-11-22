@@ -67,3 +67,9 @@ app.post("/api/import", (req, res) => {
 });
 
 app.listen(PORT, () => console.log("Dono Energy API: http://localhost:" + PORT));
+if (db.prepare("SELECT COUNT(*) c FROM accounts").get().c === 0) {
+  const s = db.prepare("INSERT INTO accounts(acc,name,addr,net,reading,balance) VALUES(?,?,?,?,?,?)");
+  s.run("1001234", "Саидов Ҳомид", "ш. Душанбе, кӯчаи Рӯдакӣ 25", 0, "24200", 70.14);
+  s.run("2005678", "Раҳимова Нигина", "ш. Хуҷанд, кӯчаи Исмоили Сомонӣ 8", 1, "18452", 0);
+  s.run("3009911", "Назаров Фирӯз", "ш. Бохтар, кӯчаи Мирзо Турсунзода 14", 2, "09120", -12.5);
+        }
